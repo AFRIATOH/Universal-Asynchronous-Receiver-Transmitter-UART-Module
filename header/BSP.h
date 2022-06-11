@@ -8,29 +8,6 @@
 #define   overflowvalue    65535
 #define   debounceVal      10000
 
-// LEDs abstraction
-#define LEDsArrPort        P1OUT
-#define LEDsArrPortDir     P1DIR
-#define LEDsArrPortSel     P1SEL
-
-// Switches abstraction
-#define SWsArrPort         P2IN
-#define SWsArrPortDir      P2DIR
-#define SWsArrPortSel      P2SEL
-#define SWmask             0x0F
-
-// PushButtons abstraction
-#define PBsArrPort	   		P1IN 
-#define PBsArrIntPend	   	P1IFG 
-#define PBsArrIntEn	   		P1IE
-#define PBsArrIntEdgeSel   	P1IES
-#define PBsArrPortSel     	P1SEL 
-#define PBsArrPortDir      	P1DIR 
-#define PB0                	0x01
-#define PB1                	0x02
-#define PB2                	0x04
-#define PB3                	0x08
-
 //  Timer abstraction
 #define TIMER_DIR          P2DIR
 #define TIMER_SEL          P2SEL
@@ -110,7 +87,6 @@ extern void GPIOconfig(void);
 extern void TIMERconfig(void);
 extern void ADCconfig(void);
 extern void UARTconfig(void);
-extern void adc(void);
 extern void DelayyUs(unsigned int cnt);
 extern void DelayyMs(unsigned int cnt);
 

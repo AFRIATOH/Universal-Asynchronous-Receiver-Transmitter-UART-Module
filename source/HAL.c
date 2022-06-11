@@ -129,32 +129,30 @@ void __attribute__ ((interrupt(USCIAB0RX_VECTOR))) USCI0RX_ISR (void)
 }
 
 //*********************************************************************
+//            UART TX Interrupt Service Rotine
+//*********************************************************************
+#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
+#pragma vector=USCIAB0TX_VECTOR
+__interrupt void USCI0TX_ISR(void)
+#elif defined(__GNUC__)
+void __attribute__ ((interrupt(USCIAB0TX_VECTOR))) USCI0TX_ISR (void)
+#else
+#error Compiler not supported!
+#endif
+{
+  UCA0TXBUF = string1[i++];                 // TX next character
+
+  if (i == sizeof string1 - 1)              // TX over?
+    IE2 &= ~UCA0TXIE;                       // Disable USCI_A0 TX interrupt
+}
+
+//*********************************************************************
 //            Port1 Interrupt Service Rotine
 //*********************************************************************
 #pragma vector=PORT1_VECTOR
   __interrupt void PBs_handler(void){
    
 	delay(debounceVal);
-
-//---------------------------------------------------------------------
-//            selector of transition between states
-//---------------------------------------------------------------------
-	if(PBsArrIntPend & PB0){
-	  state = state0;
-	  PBsArrIntPend&=0xF0;
-        }
-	else if(PBsArrIntPend & PB1){
-	  state = state1;
-      PBsArrIntPend&=0xF0;
-        }
-	else if(PBsArrIntPend & PB2){
-	    state = state2;
-	    PBsArrIntPend&=0xF0;
-    }
-	else if(PBsArrIntPend & PB3){
-	    state = state3;
-	    PBsArrIntPend&=0xF0;
-    }
 
 //---------------------------------------------------------------------
 //            Exit from a given LPM 

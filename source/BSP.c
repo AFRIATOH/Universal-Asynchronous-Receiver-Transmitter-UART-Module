@@ -10,40 +10,7 @@ void GPIOconfig(void){
  // volatile unsigned int i; // in case of while loop usage
   
   WDTCTL = WDTHOLD | WDTPW;		// Stop WDT
-   
-  // LEDs 8-bit Array Port configuration
-  /*LEDsArrPortSel &= ~0xFF;            // GPIO capability
-  LEDsArrPortDir |= 0xFF;             // output dir
-  LEDsArrPort = 0x00;				  // clear all LEDs
-  
-  
-  // Switches Setup
-  SWsArrPortSel &= ~0x0F;
-  SWsArrPortDir &= ~0x0F;
-  */
-  ///configuration of p2.2 to be peripherial and output to generate pwm signal from this pin
-  P2SEL|=0x04;
-  P2DIR|=0xE4;
-  //keypad configurtaion
-  P10DIR =0x0F;
-  P10OUT=0x00;
-  P2SEL|=0x00;
-  P2DIR&=0xFE;
-  P2IE|=0x01;
-  P2IES|=0x01;
-  // PushButtons Setup
-  //PBsArrPortSel |= 0x08;//set p1.3 to be peripherial
-  PBsArrPortDir &= 0xFF;//set p1.3 to be input
-  PBsArrPortSel &= ~0x0F;//set p1.0-p1.2 to be i/o
-  PBsArrPortDir &= ~0x0F;//set p1.0-p1.2 to be input
-  
-  PBsArrIntEdgeSel |= 0x03;  	     // pull-up mode
-  PBsArrIntEdgeSel &= ~0x0C;         // pull-down mode
-  PBsArrIntEn |= 0x0F;
-  PBsArrIntPend &= ~0x0F;            // clear pending interrupts 
-  
-  
-  
+ 
   _BIS_SR(GIE);                     // enable interrupts globally
 }                             
 
@@ -81,8 +48,8 @@ voit UARTconfig(void)
   BCSCTL1 = CALBC1_1MHZ;                    // Set DCO
   DCOCTL = CALDCO_1MHZ;
   
-  P2DIR = 0xFF;                             // All P2.x outputs
-  P2OUT = 0;                                // All P2.x reset
+//   P2DIR = 0xFF;                             // All P2.x outputs
+//   P2OUT = 0;                                // All P2.x reset
   P1SEL = BIT1 + BIT2 ;                     // P1.1 = RXD, P1.2=TXD
   P1SEL2 = BIT1 + BIT2 ;                     // P1.1 = RXD, P1.2=TXD
   P1DIR |= RXLED + TXLED;
