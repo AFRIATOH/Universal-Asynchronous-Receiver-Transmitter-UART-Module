@@ -29,7 +29,6 @@ extern void lcd_cmd(unsigned char);
 extern void lcd_data(unsigned char);
 extern void lcd_init();
 extern void lcd_strobe();
-extern void print_num_notes(int LCD_cursor);
 extern void LCDErase(void);
 
 // Delays

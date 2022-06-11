@@ -103,13 +103,13 @@
 #define lcd_function_set        lcd_cmd(0x3C) // 8bit,two lines,5x10 dots
 #define lcd_new_line            lcd_cmd(0xC0)
 
-extern int LCD_cursor;
 /// --------------------------------- END LCD -------------------------------
 
 
 extern void GPIOconfig(void);
 extern void TIMERconfig(void);
 extern void ADCconfig(void);
+extern void UARTconfig(void);
 extern void adc(void);
 extern void DelayyUs(unsigned int cnt);
 extern void DelayyMs(unsigned int cnt);

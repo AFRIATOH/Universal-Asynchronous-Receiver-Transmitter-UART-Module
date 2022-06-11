@@ -9,6 +9,7 @@ void sysConfig(void){
 	GPIOconfig();
     lcd_init();
 	TIMERconfig();
+	UARTconfig();
 }
 
 //--------------------------------------------------------------------
@@ -79,6 +80,52 @@ void enterLPM(unsigned char LPM_level){
 	  _BIS_SR(LPM3_bits);     /* Enter Low Power Mode 3 */
         else if(LPM_level == 0x04) 
 	  _BIS_SR(LPM4_bits);     /* Enter Low Power Mode 4 */
+}
+
+//*********************************************************************
+//            UART RX Interrupt Service Rotine
+//*********************************************************************
+#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
+#pragma vector=USCIAB0RX_VECTOR
+__interrupt void USCI0RX_ISR(void)
+#elif defined(__GNUC__)
+void __attribute__ ((interrupt(USCIAB0RX_VECTOR))) USCI0RX_ISR (void)
+#else
+#error Compiler not supported!
+#endif
+{
+  if (UCA0RXBUF == '1')                          // '1' received?
+  {
+	state = state1;
+  }
+  else if (UCA0RXBUF == '2')                     // '2' received?
+  {
+	state = state2;
+  }
+  else if (UCA0RXBUF == '3')                     // '3' received?
+  {
+	state = state3;
+  }
+  else if (UCA0RXBUF == '4')                     // '4' received?
+  {
+	state = state4;
+  }
+   else if (UCA0RXBUF == '5')                     // '5' received?
+  {
+	state = state5;
+  }
+   else if (UCA0RXBUF == '6')                     // '6' received?
+  {
+	state = state6;
+  }
+   else if (UCA0RXBUF == '7')                     // '7' received?
+  {
+	state = state7;
+  }
+   else if (UCA0RXBUF == '8')                     // '8' received?
+  {
+	state = state0;
+  }
 }
 
 //*********************************************************************
