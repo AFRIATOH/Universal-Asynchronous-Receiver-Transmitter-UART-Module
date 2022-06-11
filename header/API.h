@@ -5,5 +5,12 @@
 
 extern void lcd_puts(const char * s);
 extern void int_to_str(char *str, unsigned int number);
+extern void RGB_blink(void);
+extern void count_up(void);
+extern void count_down(void);
+extern void get_X(void);
+extern void potentiometer(void);
+extern void clear_all(void);
+extern void show_menu(void);
 
 #endif

@@ -5,6 +5,8 @@ enum FSMstate state;
 enum SYSmode lpm_mode;
 
 extern int X_delay = 500;
+extern int count_up_val = 0;
+extern int count_down_val = 65535;
 
 void main(void){
   
@@ -21,31 +23,31 @@ void main(void){
       break;
                   
       case state1: 
-            // RGB blink with delay of X
+            RGB_blink(); // RGB blink with delay of X
       break; 
   
       case state2:
-            // count up on LCD with delay of X
+            count_up(); // count up on LCD with delay of X
       break;
 
       case state3:
-            // count down on LCD with delay of X
+            count_down(); // count down on LCD with delay of X
       break;
 
       case state4: 
-            // set X
+            get_X(); // set X using PC
       break; 
   
       case state5:
-            // potentiometer
+            potentiometer(); // potentiometer
       break;
 
       case state6:
-            // clear LCD
+            clear_all(); // clear LCD
       break;
 
       case state7: 
-            // show menu
+            show_menu(); // show menu on PC screen
       break; 
     }
   }
