@@ -5,9 +5,10 @@
 //--------------------------------------------------------------------
 //             System Configuration  
 //--------------------------------------------------------------------
-void sysConfig(void){ 
+void sysConfig(void)
+{ 
 	GPIOconfig();
-    lcd_init();
+  lcd_init();
 	TIMERconfig();
 	UARTconfig();
 }

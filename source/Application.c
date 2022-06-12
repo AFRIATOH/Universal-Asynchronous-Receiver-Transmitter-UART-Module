@@ -19,7 +19,7 @@ void main(void){
     switch(state)
     {
       case state0:
-        enterLPM(lpm_mode);
+            enterLPM(lpm_mode);
       break;
                   
       case state1: 
