@@ -49,6 +49,10 @@ void main(void){
       case state7: 
             show_menu(); // show menu on PC screen
       break; 
+
+      case state8: 
+            // real time task
+      break; 
     }
   }
 }
