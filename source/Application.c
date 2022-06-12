@@ -35,7 +35,7 @@ void main(void){
       break;
 
       case state4: 
-            get_X(); // set X using PC
+            get_X(); // set X using
       break; 
   
       case state5:
@@ -48,10 +48,6 @@ void main(void){
 
       case state7: 
             show_menu(); // show menu on PC screen
-      break; 
-
-      case state8: 
-            // real time task
       break; 
     }
   }
