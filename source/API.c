@@ -90,6 +90,8 @@ void print_num(int num){
 //state0
 //******************************************************************
 void sleep(void){
+    RGB_clear;
+    lcd_clear();
     menu_tx = 1;
     UCA0CTL1 &= ~UCSWRST;
     IE2 |= UCA0TXIE;
@@ -101,6 +103,7 @@ void sleep(void){
 //******************************************************************
 void RGB_blink(void){
     RGB_clear;
+    lcd_clear();
     while(state == state1){
         RGBPort = 0x01;
         delay_x(X_delay);
@@ -115,6 +118,7 @@ void RGB_blink(void){
 //state2
 //******************************************************************
 void count_up(void){
+    RGB_clear;
     while(state == state2){
         lcd_clear();
         print_num(count_up_val);
@@ -127,10 +131,11 @@ void count_up(void){
 //state3
 //******************************************************************
 void count_down(void){
+    RGB_clear;
     while(state == state3){
         lcd_clear();
         print_num(count_down_val);
-        count_up_val -= 1;
+        count_down_val -= 1;
         delay_x(X_delay);
     }
 }
