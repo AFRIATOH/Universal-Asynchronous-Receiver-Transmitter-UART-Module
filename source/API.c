@@ -35,24 +35,6 @@ void int_to_str(char *str, unsigned int number){
 }
 
 void print_num(int num){
-    // char num_1 = 0x30+(num%10);
-    // char num_2 = 0x30+(num%100);
-    // char num_3 = 0x30+(num%1000);
-    // char num_4 = 0x30+(num%10000);
-    // char num_5 = 0x30+(num%100000);
-    // char num_6 = 0x30+(num%1000000);
-    // if(num < 10){
-    //     LCDErase();
-    //     lcd_data(ones);
-    //     lcd_puts(" notes");
-    // }
-    // else {
-    //     char tens = 0x30+(num/10);
-    //     LCDErase();
-    //     lcd_data(tens);
-    //     lcd_data(ones);
-    //     lcd_puts(" notes");
-    // }
     if(num < 10){
         char pr[1];
         int_to_str(pr, num);
@@ -158,11 +140,9 @@ void potentiometer(void){
 //state6
 //******************************************************************
 void clear_all(void){
-    // RGB_clear;
-    // lcd_clear();
-    // count_up_val = 0;
-    // count_down_val = 65535;
-    //state = state0;
+    count_up_val = 0;
+    count_down_val = 65535;
+    state = state0;
 }
 
 //******************************************************************
