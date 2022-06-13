@@ -104,8 +104,8 @@ void count_up(void){
     while(state == state2){
         lcd_clear();
         print_num(count_up_val);
-        count_up_val += 1;
         delay_x(X_delay);
+        count_up_val += 1;
     }
 }
 
