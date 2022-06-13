@@ -89,7 +89,7 @@ void print_num(int num){
 //state1
 //******************************************************************
 void RGB_blink(void){
-        RGB_CLR;
+        RGB_clear;
     while(state == state1){
         RGBPort = 0x01;
         delay_ms(X_delay);
