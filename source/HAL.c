@@ -146,33 +146,33 @@ __interrupt void USCI0TX_ISR(void)
 //           Port1 Interrupt Service Rotine 
 //------------------------------------------------------------------
 
-void _buttonDebounceDelay(int button){
-    volatile unsigned int i;
-    for(i = 1000; i > 0; i--);                     //delay, button debounce
-	while(!(P1IN & button)); 		   // wait of release the button
-    for(i = 1000; i > 0; i--);                     //delay, button debounce
-    P1IFG &= ~button;       	   // manual clear of p1.button
-}
+// void _buttonDebounceDelay(int button){
+//     volatile unsigned int i;
+//     for(i = 1000; i > 0; i--);                     //delay, button debounce
+// 	while(!(P1IN & button)); 		   // wait of release the button
+//     for(i = 1000; i > 0; i--);                     //delay, button debounce
+//     P1IFG &= ~button;       	   // manual clear of p1.button
+// }
 
-#pragma vector=PORT1_VECTOR
-__interrupt void PORT1_ISR(void){
-	if(P1IFG & 0x10){
-		_buttonDebounceDelay(0x10);
-		menu_tx = 1;
-		UCA0CTL1 &= ~UCSWRST;                     // **Initialize USCI state machine**
-		IE2 |= UCA0TXIE;                          // Enable USCI_A0 TX interrupt
-	}
-}
+// #pragma vector=PORT1_VECTOR
+// __interrupt void PORT1_ISR(void){
+// 	if(P1IFG & 0x10){
+// 		_buttonDebounceDelay(0x10);
+// 		menu_tx = 1;
+// 		UCA0CTL1 &= ~UCSWRST;                     // **Initialize USCI state machine**
+// 		IE2 |= UCA0TXIE;                          // Enable USCI_A0 TX interrupt
+// 	}
+// }
 
-//------------------------------------------------------------------
-//           Timer A0 Interrupt Service Rotine 
-//------------------------------------------------------------------
+// //------------------------------------------------------------------
+// //           Timer A0 Interrupt Service Rotine 
+// //------------------------------------------------------------------
 
-#pragma vector=TIMER0_A0_VECTOR
-__interrupt void Timer_A(void){
-	CCTL0 &= ~CCIE;                        	     // CCR0 interrupt enabled
-	__bic_SR_register_on_exit(LPM0_bits + GIE);  // Exit LPM0 on return to main
-}
+// #pragma vector=TIMER0_A0_VECTOR
+// __interrupt void Timer_A(void){
+// 	CCTL0 &= ~CCIE;                        	     // CCR0 interrupt enabled
+// 	__bic_SR_register_on_exit(LPM0_bits + GIE);  // Exit LPM0 on return to main
+// }
 
 //---------------------------------------------------------------------
 //            Exit from a given LPM 
