@@ -31,7 +31,7 @@ extern void LCDErase(void);
 extern void DelayMs(unsigned int);
 extern void DelayUs(unsigned int);
 extern void delay(unsigned int);
-extern void delay_x(int);
+extern void delay_x(unsigned int);
 
 // Timers
 extern void ResetTimer();
