@@ -35,6 +35,9 @@ void int_to_str(char *str, unsigned int number){
 }
 
 void print_num(int num){
+    if(num == 0){
+        lcd_puts(48);
+    }
     if(num < 10){
         char pr[1];
         int_to_str(pr, num);
