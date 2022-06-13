@@ -89,15 +89,15 @@ void print_num(int num){
 //state1
 //******************************************************************
 void RGB_blink(void){
-    // RGB_clear;
-    // while(state == state1){
-    //     RGBPort = 0x01;
-    //     delayMs(X_delay);
-    //     RGBPort = 0x02;
-    //     delayMs(X_delay);
-    //     RGBPort = 0x04;
-    //     delayMs(X_delay);
-    // }
+    RGB_clear;
+    while(state == state1){
+        RGBPort = 0x01;
+        delayMs(X_delay);
+        RGBPort = 0x02;
+        delayMs(X_delay);
+        RGBPort = 0x04;
+        delayMs(X_delay);
+    }
 }
 
 //******************************************************************
