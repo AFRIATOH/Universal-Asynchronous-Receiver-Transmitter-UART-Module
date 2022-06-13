@@ -8,7 +8,7 @@
 
 extern enum FSMstate state;   // global variable
 extern enum SYSmode lpm_mode; // global variable
-extern int menu_tx;
+extern int tx;
 
 // System
 extern void sysConfig(void);
