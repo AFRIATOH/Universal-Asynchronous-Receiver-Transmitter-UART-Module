@@ -20,7 +20,7 @@ void main(void){
     {
       case state0:
             menu_tx = 1;
-            UCA0CTL1 &= ~UCSWRST;                     // **Initialize USCI state machine**
+            UCA0CTL1 &= ~UCSWRST;
             IE2 |= UCA0TXIE;
             __bis_SR_register(LPM0_bits + GIE); 
       break;
