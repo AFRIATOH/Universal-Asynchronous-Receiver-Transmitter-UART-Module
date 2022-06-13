@@ -41,7 +41,7 @@ void delay(unsigned int t){  // t[msec]
 //---------------------------------------------------------------------
 void delay_x(unsigned int t){  // t[msec]
   CCTL0 = CCIE;                             // CCR0 interrupt enabled
-  CCR0 = t*130;
+  CCR0 = t*13000;
 }
 
 //---------------------------------------------------------------------
