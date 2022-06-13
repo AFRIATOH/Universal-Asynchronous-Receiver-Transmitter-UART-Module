@@ -38,14 +38,27 @@ void int_to_str(char *str, unsigned int number){
 //state1
 //******************************************************************
 void RGB_blink(void){
-
+        RGB_CLR;
+    while(state == state1){
+        RGBPort = 0x01;
+        delay_ms(X_delay);
+        RGBPort = 0x02;
+        delay_ms(X_delay);
+        RGBPort = 0x04;
+        delay_ms(X_delay);
+    }
 }
 
 //******************************************************************
 //state2
 //******************************************************************
 void count_up(void){
-
+    while(state == 2){
+        lcd_clear();
+        int_to_str(COU, count_up_val);
+        lcd_puts(COU, 2);
+        count_up_val += 1;
+    }
 }
 
 //******************************************************************

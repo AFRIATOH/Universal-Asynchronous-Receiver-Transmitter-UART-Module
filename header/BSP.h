@@ -23,7 +23,7 @@
 #define RGBPort           	P2OUT
 #define RGBPortSel          P2SEL
 #define RGBPortDir        	P2DIR
-#define LEDs_CLR RGBPort &= ~(BIT0 + BIT1 + BIT2)     //clear LEDs
+#define RGB_clear RGBPort &= ~(BIT0 + BIT1 + BIT2)     //clear LEDs
 
 /// --------------------------------- LCD -----------------------------------
 
@@ -96,8 +96,8 @@ extern void UARTconfig(void);
 extern void DelayyUs(unsigned int cnt);
 extern void DelayyMs(unsigned int cnt);
 
-extern int X_delay = 500;
-extern int count_up_val = 0;
-extern int count_down_val = 65535;
+extern int X_delay;
+extern int count_up_val;
+extern int count_down_val;
 
 #endif
