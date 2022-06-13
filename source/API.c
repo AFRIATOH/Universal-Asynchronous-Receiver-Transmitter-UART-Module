@@ -142,7 +142,11 @@ void potentiometer(void){
 //state6
 //******************************************************************
 void clear_all(void){
-
+    // RGB_clear;
+    // lcd_clear();
+    // count_up_val = 0;
+    // count_down_val = 65535;
+    //state = state0;
 }
 
 //******************************************************************
@@ -156,4 +160,4 @@ void show_menu(void){
 //state8
 //******************************************************************
 
-            // real time task
+    // real time task
