@@ -19,7 +19,10 @@ void main(void){
     switch(state)
     {
       case state0:
-            enterLPM(lpm_mode);
+            menu_tx = 1;
+            UCA0CTL1 &= ~UCSWRST;                     // **Initialize USCI state machine**
+            IE2 |= UCA0TXIE;
+            __bis_SR_register(LPM0_bits + GIE); 
       break;
                   
       case state1: 
