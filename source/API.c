@@ -74,7 +74,7 @@ void print_num(int num){
 void sleep(void){
     RGB_clear;
     lcd_clear();
-    menu_tx = 1;
+    tx = 1;
     UCA0CTL1 &= ~UCSWRST;
     IE2 |= UCA0TXIE;
     __bis_SR_register(LPM0_bits + GIE); 
@@ -149,7 +149,12 @@ void clear_all(void){
 //state7
 //******************************************************************
 void show_menu(void){
-
+    RGB_clear;
+    lcd_clear();
+    tx = 1;
+    UCA0CTL1 &= ~UCSWRST;
+    IE2 |= UCA0TXIE;
+    __bis_SR_register(LPM0_bits + GIE);
 }
 
 //******************************************************************

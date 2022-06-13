@@ -2,7 +2,7 @@
 #include  "../header/API.h"    		// private library - API layer
 
 unsigned int i,j;
-int menu_tx = 1;
+int tx = 1;
 const char MENU[] = "\n"
 					"-----------------------Menu-------------------------\n"
 					"1. Blink RGB LED, color by color with delay of X[ms]\n"
@@ -135,10 +135,10 @@ __interrupt void USCI0TX_ISR(void)
 		// 	IE2 &= ~UCA0TXIE;        					 // Disable USCI_A0 TX interrupt
 		// 	IE2 |= UCA0RXIE;                 			 // Enable USCI_A0 RX interrupt	
 		// 	state = 7;
-			menu_tx = 0;
+			tx = 0;
             // }
 	}
-	else if(menu_tx){
+	else if(tx){
         UCA0TXBUF = MENU[i++];
         if (i == sizeof MENU - 1){						 // TX over?
                 i = 0; 
