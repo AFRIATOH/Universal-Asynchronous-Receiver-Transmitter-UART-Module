@@ -69,7 +69,7 @@ void enterLPM(unsigned char LPM_level){
 __interrupt void USCI0RX_ISR(void)
 {
   if (state != state4){
-	    if (UCA0RXBUF - 48 == 1)                          // '1' received?
+	    if (UCA0RXBUF == '1')                          // '1' received?
 		{
 			state = state1;
 			__bic_SR_register_on_exit(LPM0_bits + GIE);

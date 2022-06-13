@@ -129,7 +129,7 @@ void count_up(void){
 void count_down(void){
     while(state == state3){
         lcd_clear();
-        print_num(count_up_val);
+        print_num(count_down_val);
         count_up_val -= 1;
         delay_x(X_delay);
     }
