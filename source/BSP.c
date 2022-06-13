@@ -18,10 +18,10 @@ void GPIOconfig(void){
 //            Timers congiguration 
 //-------------------------------------------------------------------------------------
 void TIMERconfig(void){
-
-    TACCR0=0xFFFF;
-    TACTL=TASSEL_2+MC_1;// SET TIMER TO WORK WITH MASTERCLOCK AND TO COUNT UNTILL THE VALUE OF TBCL
-    TACCTL0=CCIE;
+  
+  CCR0 = X_delay*130;
+  TACTL = TASSEL_2 + ID_3 + MC_1 + TACLR; 
+  __bis_SR_register(LPM0_bits + GIE); 
 
 }
 

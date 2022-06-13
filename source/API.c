@@ -92,11 +92,11 @@ void RGB_blink(void){
     RGB_clear;
     while(state == state1){
         RGBPort = 0x01;
-        delayMs(X_delay);
+        delay_x(X_delay);
         RGBPort = 0x02;
-        delayMs(X_delay);
+        delay_x(X_delay);
         RGBPort = 0x04;
-        delayMs(X_delay);
+        delay_x(X_delay);
     }
 }
 
