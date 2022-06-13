@@ -34,7 +34,4 @@ extern void delay(unsigned int);
 extern void ResetTimer();
 extern void TIMERdelay(int);
 
-
-
-
 #endif
