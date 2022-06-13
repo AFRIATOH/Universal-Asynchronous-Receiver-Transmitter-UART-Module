@@ -4,7 +4,7 @@
 enum FSMstate state;
 enum SYSmode lpm_mode;
 
-extern int X_delay = 500;
+extern unsigned int X_delay = 500;
 extern int count_up_val = 0;
 extern int count_down_val = 65535;
 

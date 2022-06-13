@@ -96,7 +96,7 @@ extern void UARTconfig(void);
 extern void DelayyUs(unsigned int cnt);
 extern void DelayyMs(unsigned int cnt);
 
-extern int X_delay;
+extern unsigned int X_delay;
 extern int count_up_val;
 extern int count_down_val;
 

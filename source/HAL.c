@@ -25,7 +25,7 @@ void sysConfig(void)
 	RGBconfig();
   	lcd_init();
 	//GPIOconfig();
-	//TIMERconfig();
+	TIMERconfig();
 }
 
 //---------------------------------------------------------------------
@@ -34,6 +34,14 @@ void sysConfig(void)
 void delay(unsigned int t){  // t[msec]
 	volatile unsigned int i;
 	for(i=t; i>0; i--);
+}
+
+//---------------------------------------------------------------------
+//            Delay function
+//---------------------------------------------------------------------
+void delay_x(unsigned int t){  // t[msec]
+  CCTL0 = CCIE;                             // CCR0 interrupt enabled
+  CCR0 = t*130;
 }
 
 //---------------------------------------------------------------------
@@ -164,41 +172,15 @@ __interrupt void USCI0TX_ISR(void)
 // 	}
 // }
 
-// //------------------------------------------------------------------
-// //           Timer A0 Interrupt Service Rotine 
-// //------------------------------------------------------------------
+//------------------------------------------------------------------
+//           Timer A0 Interrupt Service Rotine 
+//------------------------------------------------------------------
 
-// #pragma vector=TIMER0_A0_VECTOR
-// __interrupt void Timer_A(void){
-// 	CCTL0 &= ~CCIE;                        	     // CCR0 interrupt enabled
-// 	__bic_SR_register_on_exit(LPM0_bits + GIE);  // Exit LPM0 on return to main
-// }
-
-//---------------------------------------------------------------------
-//            Exit from a given LPM 
-//---------------------------------------------------------------------	
-//         switch(lpm_mode){
-// 		case mode0:
-// 		 LPM0_EXIT; // must be called from ISR only
-// 		 break;
-		 
-// 		case mode1:
-// 		 LPM1_EXIT; // must be called from ISR only
-// 		 break;
-		 
-// 		case mode2:
-// 		 LPM2_EXIT; // must be called from ISR only
-// 		 break;
-                 
-//                 case mode3:
-// 		 LPM3_EXIT; // must be called from ISR only
-// 		 break;
-                 
-//                 case mode4:
-// 		 LPM4_EXIT; // must be called from ISR only
-// 		 break;
-// 	}  
-// }
+#pragma vector=TIMER0_A0_VECTOR
+__interrupt void Timer_A(void){
+	CCTL0 &= ~CCIE;                        	     // CCR0 interrupt enabled
+	__bic_SR_register_on_exit(LPM0_bits + GIE);  // Exit LPM0 on return to main
+}
 
 //******************************************************************
 // send a command to the LCD
