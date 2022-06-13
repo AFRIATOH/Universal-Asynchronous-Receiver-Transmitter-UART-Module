@@ -145,28 +145,28 @@ __interrupt void USCI0TX_ISR(void)
 //---------------------------------------------------------------------
 //            Exit from a given LPM 
 //---------------------------------------------------------------------	
-        switch(lpm_mode){
-		case mode0:
-		 LPM0_EXIT; // must be called from ISR only
-		 break;
+//         switch(lpm_mode){
+// 		case mode0:
+// 		 LPM0_EXIT; // must be called from ISR only
+// 		 break;
 		 
-		case mode1:
-		 LPM1_EXIT; // must be called from ISR only
-		 break;
+// 		case mode1:
+// 		 LPM1_EXIT; // must be called from ISR only
+// 		 break;
 		 
-		case mode2:
-		 LPM2_EXIT; // must be called from ISR only
-		 break;
+// 		case mode2:
+// 		 LPM2_EXIT; // must be called from ISR only
+// 		 break;
                  
-                case mode3:
-		 LPM3_EXIT; // must be called from ISR only
-		 break;
+//                 case mode3:
+// 		 LPM3_EXIT; // must be called from ISR only
+// 		 break;
                  
-                case mode4:
-		 LPM4_EXIT; // must be called from ISR only
-		 break;
-	}  
-}
+//                 case mode4:
+// 		 LPM4_EXIT; // must be called from ISR only
+// 		 break;
+// 	}  
+// }
 
 //******************************************************************
 // send a command to the LCD
