@@ -92,11 +92,11 @@ void RGB_blink(void){
         RGB_clear;
     while(state == state1){
         RGBPort = 0x01;
-        delay_ms(X_delay);
+        delayMs(X_delay);
         RGBPort = 0x02;
-        delay_ms(X_delay);
+        delayMs(X_delay);
         RGBPort = 0x04;
-        delay_ms(X_delay);
+        delayMs(X_delay);
     }
 }
 
@@ -108,6 +108,7 @@ void count_up(void){
         lcd_clear();
         print_num(count_up_val);
         count_up_val += 1;
+        delayMs(X_delay);
     }
 }
 
@@ -119,6 +120,7 @@ void count_down(void){
         lcd_clear();
         print_num(count_up_val);
         count_up_val -= 1;
+        delayMs(X_delay);
     }
 }
 
