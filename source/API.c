@@ -89,39 +89,39 @@ void print_num(int num){
 //state1
 //******************************************************************
 void RGB_blink(void){
-        RGB_clear;
-    while(state == state1){
-        RGBPort = 0x01;
-        delayMs(X_delay);
-        RGBPort = 0x02;
-        delayMs(X_delay);
-        RGBPort = 0x04;
-        delayMs(X_delay);
-    }
+    // RGB_clear;
+    // while(state == state1){
+    //     RGBPort = 0x01;
+    //     delayMs(X_delay);
+    //     RGBPort = 0x02;
+    //     delayMs(X_delay);
+    //     RGBPort = 0x04;
+    //     delayMs(X_delay);
+    // }
 }
 
 //******************************************************************
 //state2
 //******************************************************************
 void count_up(void){
-    while(state == state2){
-        lcd_clear();
-        print_num(count_up_val);
-        count_up_val += 1;
-        delayMs(X_delay);
-    }
+    // while(state == state2){
+    //     lcd_clear();
+    //     print_num(count_up_val);
+    //     count_up_val += 1;
+    //     delayMs(X_delay);
+    // }
 }
 
 //******************************************************************
 //state3
 //******************************************************************
 void count_down(void){
-    while(state == state3){
-        lcd_clear();
-        print_num(count_up_val);
-        count_up_val -= 1;
-        delayMs(X_delay);
-    }
+    // while(state == state3){
+    //     lcd_clear();
+    //     print_num(count_up_val);
+    //     count_up_val -= 1;
+    //     delayMs(X_delay);
+    // }
 }
 
 //******************************************************************
