@@ -10,6 +10,7 @@ extern int count_down_val = 65535;
 
 void main(void){
   
+
   sysConfig();
   state = state7;  // start in idle state on RESET
   lpm_mode = mode0;     // start in idle state on RESET
