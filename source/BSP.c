@@ -61,7 +61,7 @@ void UARTconfig(void)
 //   P2OUT = 0;                                // All P2.x reset
   P1SEL |= BIT1 + BIT2 ;                     // P1.1 = RXD, P1.2=TXD
   P1SEL2 |= BIT1 + BIT2 ;                     // P1.1 = RXD, P1.2=TXD
-  //P1DIR |= RXLED + TXLED;
+  P1DIR |= RXLED + TXLED;
   P1OUT &= ~(BIT1 + BIT2);
   
   UCA0CTL1 |= UCSSEL_2;                     // CLK = SMCLK
