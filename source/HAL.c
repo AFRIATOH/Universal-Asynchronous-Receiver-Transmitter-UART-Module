@@ -25,7 +25,7 @@ void sysConfig(void)
 	RGBconfig();
   	lcd_init();
 	//GPIOconfig();
-	//TIMERconfig();
+	TIMERconfig();
 }
 
 //---------------------------------------------------------------------
