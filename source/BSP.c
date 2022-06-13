@@ -30,13 +30,22 @@ void TIMERconfig(void){
 //-------------------------------------------------------------------------------------
 void ADCconfig(void){
 	
-	//write here ADC congiguration code
+	ADC10AE0 |= BIT3;
 }   
 
 //------------------------------------------------------------------------------------- 
+//            RGB congiguration 
+//-------------------------------------------------------------------------------------
+void RGBconfig(void){
+	
+	RGBPortSel &= ~(BIT0 + BIT1 + BIT2);				// Leds GPIO
+	RGBPortDir |= (BIT0 + BIT1 + BIT2);                // Leds GPIO-output
+	RGB_clear;	
+}   
+//------------------------------------------------------------------------------------- 
 //           UART congiguration 
 //-------------------------------------------------------------------------------------
-voit UARTconfig(void)
+void UARTconfig(void)
 {
   WDTCTL = WDTPW + WDTHOLD;                 // Stop WDT
   
@@ -50,18 +59,18 @@ voit UARTconfig(void)
   
 //   P2DIR = 0xFF;                             // All P2.x outputs
 //   P2OUT = 0;                                // All P2.x reset
-  P1SEL = BIT1 + BIT2 ;                     // P1.1 = RXD, P1.2=TXD
-  P1SEL2 = BIT1 + BIT2 ;                     // P1.1 = RXD, P1.2=TXD
-  P1DIR |= RXLED + TXLED;
-  P1OUT &= 0x00;
+  P1SEL |= BIT1 + BIT2 ;                     // P1.1 = RXD, P1.2=TXD
+  P1SEL2 |= BIT1 + BIT2 ;                     // P1.1 = RXD, P1.2=TXD
+  //P1DIR |= RXLED + TXLED;
+  P1OUT &= ~(BIT1 + BIT2);
   
   UCA0CTL1 |= UCSSEL_2;                     // CLK = SMCLK
   UCA0BR0 = 104;                           // 
   UCA0BR1 = 0x00;                           //
   UCA0MCTL = UCBRS0;               // 
-  UCA0CTL1 &= ~UCSWRST;                     // **Initialize USCI state machine**
-  IE2 |= UCA0RXIE;                          // Enable USCI_A0 RX interrupt
-  __bis_SR_register(LPM0_bits + GIE);       // Enter LPM3 w/ int until Byte RXed
+  //UCA0CTL1 &= ~UCSWRST;                     // **Initialize USCI state machine**
+  //IE2 |= UCA0RXIE;                          // Enable USCI_A0 RX interrupt
+  //__bis_SR_register(LPM0_bits + GIE);       // Enter LPM3 w/ int until Byte RXed
 }
 //******************************************************************
 // Delay usec functions
@@ -82,10 +91,3 @@ void DelayyMs(unsigned int cnt){
 	
 }
 //******************************************************************
-
-
-#pragma vector=TIMERB0_VECTOR
-__interrupt void Timer_B (void)
-{
-    //write here TimerB congiguration code
-}

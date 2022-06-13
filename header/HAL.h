@@ -8,17 +8,11 @@
 
 extern enum FSMstate state;   // global variable
 extern enum SYSmode lpm_mode; // global variable
+extern int menu_tx;
 
 // System
 extern void sysConfig(void);
 extern void enterLPM(unsigned char);
-
-// LEDs
-extern void print2LEDs(unsigned char);
-extern void clrLEDs(void);
-extern void toggleLEDs(char);
-extern void setLEDs(char);
-extern void incLEDs(char);
 
 // Interrupts
 extern void enable_interrupts();
@@ -42,5 +36,5 @@ extern void TIMERdelay(int);
 
 
 
-extern unsigned char readSWs(void);
+
 #endif

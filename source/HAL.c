@@ -1,62 +1,31 @@
 #include  "../header/HAL.h"     // private library - HAL layer
 #include  "../header/API.h"    		// private library - API layer
 
-
+unsigned int i,j;
+int menu_tx = 1;
+const char MENU[] = "\n"
+					"-----------------------Menu-------------------------\n"
+					"1. Blink RGB LED, color by color with delay of X[ms]\n"
+					"2. Count up onto LCD screen with delay of X[ms]\n"
+					"3. Count down onto LCD screen with delay of X[ms]\n"
+					"4. Get delay time X[ms]\n"
+					"5. Potentiometer 3-digit value [v]\n"
+					"6. Clear LCD screen\n"
+					"7. Show menu\n"
+                    "8. Sleep\n"
+					"---------------------------------------------------\r";
+					
 //--------------------------------------------------------------------
 //             System Configuration  
 //--------------------------------------------------------------------
 void sysConfig(void)
 { 
-	GPIOconfig();
-  lcd_init();
-	TIMERconfig();
 	UARTconfig();
-}
-
-//--------------------------------------------------------------------
-// 				Print Byte to 8-bit LEDs array 
-//--------------------------------------------------------------------
-void print2LEDs(unsigned char ch){
-	LEDsArrPort = ch;
-}    
-
-//--------------------------------------------------------------------
-//				Clear 8-bit LEDs array 
-//--------------------------------------------------------------------
-void clrLEDs(void){
-	LEDsArrPort = 0x000;
-}  
-
-//--------------------------------------------------------------------
-//				Toggle 8-bit LEDs array 
-//--------------------------------------------------------------------
-void toggleLEDs(char ch){
-	LEDsArrPort ^= ch;
-}
-
-//--------------------------------------------------------------------
-//				Set 8-bit LEDs array 
-//--------------------------------------------------------------------
-void setLEDs(char ch){
-	LEDsArrPort |= ch;
-}
-
-//--------------------------------------------------------------------
-//				Read value of 4-bit SWs array 
-//--------------------------------------------------------------------
-unsigned char readSWs(void){
-	unsigned char ch;
-	
-	ch = PBsArrPort;
-	ch &= SWmask;     // mask the least 4-bit
-	return ch;
-}
-
-//---------------------------------------------------------------------
-//             Increment / decrement LEDs shown value 
-//---------------------------------------------------------------------
-void incLEDs(char val){
-	LEDsArrPort += val;
+	ADCconfig();
+	RGBconfig();
+  	lcd_init();
+	//GPIOconfig();
+	//TIMERconfig();
 }
 
 //---------------------------------------------------------------------
@@ -86,65 +55,85 @@ void enterLPM(unsigned char LPM_level){
 //*********************************************************************
 //            UART RX Interrupt Service Rotine
 //*********************************************************************
-#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
+
 #pragma vector=USCIAB0RX_VECTOR
 __interrupt void USCI0RX_ISR(void)
-#elif defined(__GNUC__)
-void __attribute__ ((interrupt(USCIAB0RX_VECTOR))) USCI0RX_ISR (void)
-#else
-#error Compiler not supported!
-#endif
 {
   if (UCA0RXBUF == '1')                          // '1' received?
   {
 	state = state1;
+	__bic_SR_register_on_exit(LPM0_bits + GIE);
   }
   else if (UCA0RXBUF == '2')                     // '2' received?
   {
 	state = state2;
+	__bic_SR_register_on_exit(LPM0_bits + GIE);
   }
   else if (UCA0RXBUF == '3')                     // '3' received?
   {
 	state = state3;
-  }
-  else if (UCA0RXBUF == '4')                     // '4' received?
-  {
-	state = state4;
+	__bic_SR_register_on_exit(LPM0_bits + GIE);
   }
    else if (UCA0RXBUF == '5')                     // '5' received?
   {
 	state = state5;
+	__bic_SR_register_on_exit(LPM0_bits + GIE);
   }
    else if (UCA0RXBUF == '6')                     // '6' received?
   {
 	state = state6;
+	__bic_SR_register_on_exit(LPM0_bits + GIE);
   }
    else if (UCA0RXBUF == '7')                     // '7' received?
   {
 	state = state7;
+	__bic_SR_register_on_exit(LPM0_bits + GIE);
   }
    else if (UCA0RXBUF == '8')                     // '8' received?
   {
 	state = state0;
+	__bic_SR_register_on_exit(LPM0_bits + GIE);
+  }
+	else if (UCA0RXBUF == '9')                     // '8' received?
+  {
+	state = state8;
+	__bic_SR_register_on_exit(LPM0_bits + GIE);
+  }
+	else if (UCA0RXBUF == '4')                     // '4' received?
+  {
+	//change X
   }
 }
 
 //*********************************************************************
 //            UART TX Interrupt Service Rotine
 //*********************************************************************
-#if defined(__TI_COMPILER_VERSION__) || defined(__IAR_SYSTEMS_ICC__)
+
 #pragma vector=USCIAB0TX_VECTOR
 __interrupt void USCI0TX_ISR(void)
-#elif defined(__GNUC__)
-void __attribute__ ((interrupt(USCIAB0TX_VECTOR))) USCI0TX_ISR (void)
-#else
-#error Compiler not supported!
-#endif
-{
-  UCA0TXBUF = string1[i++];                 // TX next character
 
-  if (i == sizeof string1 - 1)              // TX over?
-    IE2 &= ~UCA0TXIE;                       // Disable USCI_A0 TX interrupt
+{           		
+	if(state == 5){
+		// TxBuffer = POT[i++];
+		// if (i == sizeof POT -1){					     // TX over?
+		// 	i = 0; 
+		// 	IE2 &= ~UCA0TXIE;        					 // Disable USCI_A0 TX interrupt
+		// 	IE2 |= UCA0RXIE;                 			 // Enable USCI_A0 RX interrupt	
+		// 	state = 7;
+			menu_tx = 0;
+            // }
+	}
+	else if(menu_tx){
+        UCA0TXBUF = MENU[i++];
+        if (i == sizeof MENU - 1){						 // TX over?
+                i = 0; 
+                IE2 &= ~UCA0TXIE;                		 // Disable USCI_A0 TX interrupt
+                IE2 |= UCA0RXIE;                 		 // Enable USCI_A0 RX interrupt	
+        }			
+	}
+	else{
+	  IE2 &= ~UCA0TXIE;    
+	}
 }
 
 //*********************************************************************
@@ -259,32 +248,32 @@ void lcd_init(){
 	LCD_RS_DIR(OUTPUT_PIN);
 	LCD_EN_DIR(OUTPUT_PIN);
 	LCD_RW_DIR(OUTPUT_PIN);
-        LCD_DATA_DIR |= OUTPUT_DATA;
-        LCD_RS(0);
+    LCD_DATA_DIR |= OUTPUT_DATA;
+    LCD_RS(0);
 	LCD_EN(0);
 	LCD_RW(0);
 
 	DelayMs(15);
-        LCD_DATA_WRITE &= ~OUTPUT_DATA;
+    LCD_DATA_WRITE &= ~OUTPUT_DATA;
 	LCD_DATA_WRITE |= init_value;
 	lcd_strobe();
 	DelayMs(5);
-        LCD_DATA_WRITE &= ~OUTPUT_DATA;
+    LCD_DATA_WRITE &= ~OUTPUT_DATA;
 	LCD_DATA_WRITE |= init_value;
 	lcd_strobe();
 	DelayUs(200);
-        LCD_DATA_WRITE &= ~OUTPUT_DATA;
+    LCD_DATA_WRITE &= ~OUTPUT_DATA;
 	LCD_DATA_WRITE |= init_value;
 	lcd_strobe();
 
 	if (LCD_MODE == FOURBIT_MODE){
 		LCD_WAIT; // may check LCD busy flag, or just delay a little, depending on lcd.h
-                LCD_DATA_WRITE &= ~OUTPUT_DATA;
+        LCD_DATA_WRITE &= ~OUTPUT_DATA;
 		LCD_DATA_WRITE |= 0x2 << LCD_DATA_OFFSET; // Set 4-bit mode
 		lcd_strobe();
 		lcd_cmd(0x28); // Function Set
 	}
-        else lcd_cmd(0x3C); // 8bit,two lines,5x10 dots
+    else lcd_cmd(0x3C); // 8bit,two lines,5x10 dots
 
 	lcd_cmd(0xF); //Display On, Cursor On, Cursor Blink
 	lcd_cmd(0x1); //Display Clear
