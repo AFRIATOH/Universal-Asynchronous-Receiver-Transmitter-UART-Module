@@ -17,7 +17,7 @@ void lcd_puts(const char * s){
 //******************************************************************
 void int_to_str(char *str, unsigned int number){
    long tmp = number, Strlen = 0;
-   int lenth = 0;
+   int length = 0;
 
    while(tmp){
        Strlen++;
@@ -29,11 +29,62 @@ void int_to_str(char *str, unsigned int number){
        number /= 10;
    }
 
-   lenth = Strlen;
-   str[lenth] = '\0';
+   length = Strlen;
+   str[length] = '\0';
    
 }
 
+void print_num(int num){
+    // char num_1 = 0x30+(num%10);
+    // char num_2 = 0x30+(num%100);
+    // char num_3 = 0x30+(num%1000);
+    // char num_4 = 0x30+(num%10000);
+    // char num_5 = 0x30+(num%100000);
+    // char num_6 = 0x30+(num%1000000);
+    // if(num < 10){
+    //     LCDErase();
+    //     lcd_data(ones);
+    //     lcd_puts(" notes");
+    // }
+    // else {
+    //     char tens = 0x30+(num/10);
+    //     LCDErase();
+    //     lcd_data(tens);
+    //     lcd_data(ones);
+    //     lcd_puts(" notes");
+    // }
+    if(num < 10){
+        char pr[1];
+        int_to_str(pr, num);
+        lcd_puts(pr);
+    }
+    else if(num < 100){
+        char pr[2];
+        int_to_str(pr, num);
+        lcd_puts(pr);
+    }
+    else if(num < 1000){
+        char pr[3];
+        int_to_str(pr, num);
+        lcd_puts(pr);
+    }
+    else if(num < 10000){
+        char pr[4];
+        int_to_str(pr, num);
+        lcd_puts(pr);
+    }
+    else if(num < 100000){
+        char pr[5];
+        int_to_str(pr, num);
+        lcd_puts(pr);
+    }
+    else if(num < 1000000){
+        char pr[6];
+        int_to_str(pr, num);
+        lcd_puts(pr);
+    }
+
+}
 //******************************************************************
 //state1
 //******************************************************************
@@ -53,10 +104,9 @@ void RGB_blink(void){
 //state2
 //******************************************************************
 void count_up(void){
-    while(state == 2){
+    while(state == state2){
         lcd_clear();
-        int_to_str(COU, count_up_val);
-        lcd_puts(COU, 2);
+        print_num(count_up_val);
         count_up_val += 1;
     }
 }
@@ -65,7 +115,11 @@ void count_up(void){
 //state3
 //******************************************************************
 void count_down(void){
-
+    while(state == state3){
+        lcd_clear();
+        print_num(count_up_val);
+        count_up_val -= 1;
+    }
 }
 
 //******************************************************************
