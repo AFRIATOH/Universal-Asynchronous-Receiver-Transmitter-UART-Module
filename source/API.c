@@ -115,24 +115,24 @@ void RGB_blink(void){
 //state2
 //******************************************************************
 void count_up(void){
-    // while(state == state2){
-    //     lcd_clear();
-    //     print_num(count_up_val);
-    //     count_up_val += 1;
-    //     delayMs(X_delay);
-    // }
+    while(state == state2){
+        lcd_clear();
+        print_num(count_up_val);
+        count_up_val += 1;
+        delayMs(X_delay);
+    }
 }
 
 //******************************************************************
 //state3
 //******************************************************************
 void count_down(void){
-    // while(state == state3){
-    //     lcd_clear();
-    //     print_num(count_up_val);
-    //     count_up_val -= 1;
-    //     delayMs(X_delay);
-    // }
+    while(state == state3){
+        lcd_clear();
+        print_num(count_up_val);
+        count_up_val -= 1;
+        delayMs(X_delay);
+    }
 }
 
 //******************************************************************
