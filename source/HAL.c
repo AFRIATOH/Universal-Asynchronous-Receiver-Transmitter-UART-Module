@@ -114,10 +114,6 @@ __interrupt void USCI0RX_ISR(void)
 			state = state8;
 			__bic_SR_register_on_exit(LPM0_bits + GIE);
 		}
-			else if (UCA0RXBUF == '4')                     // '4' received?
-		{
-			//change X
-		}
   }
   else {
 		new_X[j++] = UCA0RXBUF;
