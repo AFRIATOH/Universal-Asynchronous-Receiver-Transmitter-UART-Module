@@ -48,7 +48,7 @@ def reset_com():
 
 
 def main():
-    scom = reset_com()
+    scom = reset_com()   #reset the buffers
     enableTX = False
     while 1:
         # RX
