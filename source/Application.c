@@ -7,6 +7,8 @@ enum SYSmode lpm_mode;
 extern unsigned int X_delay = 500;
 extern int count_up_val = 0;
 extern int count_down_val = 65535;
+extern volatile char new_X[6];
+extern volatile char potentiometer_val[4]={' ',' ',' ',' '};
 
 void main(void){
   

@@ -30,6 +30,7 @@ void TIMERconfig(void){
 void ADCconfig(void){
 	
 	ADC10AE0 |= BIT3;
+  ADC10CTL1 = INCH_3 + ADC10SSEL_0;
 }   
 
 //------------------------------------------------------------------------------------- 

@@ -34,6 +34,40 @@ void int_to_str(char *str, unsigned int number){
    
 }
 
+int str_to_int( char volatile *str)
+{
+    int i,res = 0;
+    for (i = 0; str[i] != '\0'; ++i) {
+        if (str[i]> '9' || str[i]<'0')
+            return -1;
+        res = res * 10 + str[i] - '0';
+    }
+
+    return res;
+}
+
+void to_string(char *str, unsigned int number){
+
+    int size = 0;
+    long tmp = number;
+    long len = 0;
+
+    // Find the size of the intPart by repeatedly dividing by 10
+    while(tmp){
+        len++;
+        tmp /= 10;
+    }
+
+    // Print out the numbers in reverse
+    int j;
+    for(j = len - 1; j >= 0; j--){
+        str[j] = (number % 10) + '0';
+        number /= 10;
+    }
+    size += len;
+    str[size] = '\0';
+}
+
 void print_num(int num){
     if(num == 0){
         lcd_puts(48);
@@ -129,7 +163,7 @@ void count_down(void){
 //state4
 //******************************************************************
 void get_X(void){
-
+    __bis_SR_register(LPM0_bits+GIE);
 }
 
 //******************************************************************
@@ -138,7 +172,19 @@ void get_X(void){
 void potentiometer(void){
 
 }
-
+void potentiometer(){
+    ADC10CTL0 = ADC10SHT_0 + ADC10IE;
+    ADC10CTL0 |= ADC10ON;
+    ADC10CTL0 &= ~ENC;
+    while(ADC10CTL1 & ADC10BUSY);
+    ADC10CTL0 |= ENC + ADC10SC;
+    __bis_SR_register(CPUOFF + GIE);
+    __no_operation();                       // For debugger
+    ADC10CTL0 &= ~ADC10ON;
+    to_string(potentiometer_val,ADC10MEM);
+    UCA0CTL1 &= ~UCSWRST;
+    IE2 |= UCA0TXIE;
+}
 //******************************************************************
 //state6
 //******************************************************************

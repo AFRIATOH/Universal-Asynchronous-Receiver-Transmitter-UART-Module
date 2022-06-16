@@ -84,6 +84,11 @@ __interrupt void USCI0RX_ISR(void)
 			state = state3;
 			__bic_SR_register_on_exit(LPM0_bits + GIE);
 		}
+		else if (UCA0RXBUF == '4')                     // '4' received?
+		{
+			state = state4;
+			__bic_SR_register_on_exit(LPM0_bits + GIE);
+		}
 		else if (UCA0RXBUF == '5')                     // '5' received?
 		{
 			state = state5;
@@ -115,9 +120,13 @@ __interrupt void USCI0RX_ISR(void)
 		}
   }
   else {
-
+		new_X[j++] = RxBuffer;
+	  	if (new_X[j-1] == '\0'){
+		  j = 0;
+		  x = str_to_int(X);
+          state = state0;
+	  }
   }
-
 }
 
 //*********************************************************************
@@ -129,14 +138,14 @@ __interrupt void USCI0TX_ISR(void)
 
 {           		
 	if(state == state5){
-		// TxBuffer = POT[i++];
-		// if (i == sizeof POT -1){					     // TX over?
-		// 	i = 0; 
-		// 	IE2 &= ~UCA0TXIE;        					 // Disable USCI_A0 TX interrupt
-		// 	IE2 |= UCA0RXIE;                 			 // Enable USCI_A0 RX interrupt	
-		// 	state = 7;
+		UCA0TXBUF = potentiometer_val[i++];
+		if (i == sizeof potentiometer_val -1){					     // TX over?
+			i = 0; 
+			IE2 &= ~UCA0TXIE;        					 // Disable USCI_A0 TX interrupt
+			IE2 |= UCA0RXIE;                 			 // Enable USCI_A0 RX interrupt
+			state = state0;
 			tx = 0;
-            // }
+            }
 	}
 	else if(tx){
         UCA0TXBUF = MENU[i++];
@@ -181,6 +190,15 @@ __interrupt void USCI0TX_ISR(void)
 __interrupt void Timer_A(void){
 	CCTL0 &= ~CCIE;                        	     // CCR0 interrupt enabled
 	__bic_SR_register_on_exit(LPM0_bits + GIE);  // Exit LPM0 on return to main
+}
+
+//------------------------------------------------------------------
+//           ADC Interrupt Service Rotine 
+//------------------------------------------------------------------
+
+#pragma vector=ADC10_VECTOR
+__interrupt void ADC10_ISR(void){
+    __bic_SR_register_on_exit(CPUOFF);        // Clear CPUOFF bit from 0(SR)
 }
 
 //******************************************************************
