@@ -138,7 +138,7 @@ __interrupt void USCI0TX_ISR(void)
 			i = 0; 
 			IE2 &= ~UCA0TXIE;        					 // Disable USCI_A0 TX interrupt
 			IE2 |= UCA0RXIE;                 			 // Enable USCI_A0 RX interrupt
-			state = state7;
+			state = state8;
 			tx = 0;
             }
 	}
