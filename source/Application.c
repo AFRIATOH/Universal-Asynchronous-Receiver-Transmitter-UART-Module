@@ -14,7 +14,7 @@ void main(void){
   
 
   sysConfig();
-  state = state7;  // start in idle state on RESET
+  state = state8;  // start in idle state on RESET
   lpm_mode = mode0;     // start in idle state on RESET
 
   while(1)
@@ -50,15 +50,15 @@ void main(void){
       break;
 
       case state7: 
-            show_menu(); // show menu on PC screen
+            // real time task
       break; 
 
       case state8: 
-            // real time task
+            show_menu(); // show menu on PC screen
       break;
 
       default:
-          state = state7;
+          state = state8;
           break;
     }
   }

@@ -2,7 +2,7 @@ import sys
 import serial as ser
 import time
 
-state = '7'
+state = '8'
 
 def transmit_data(scom, enableTX, delay=0.30):       #TX
     while scom.out_waiting or enableTX:  # while the output buffer isn't empty
@@ -32,7 +32,7 @@ def receive_data(scom, enableTX, delay=0.30):      # RX
             pot = pot.replace('\0', '')
             volt = (str(3.3 * int(pot) / 1024))
             print(" Potentiometer value: " + volt[:5] + " [Volt]")
-            state = '7'
+            state = '8'
             enableTX = False
         time.sleep(delay)  # delay for accurate read/write operations on both ends
     return enableTX

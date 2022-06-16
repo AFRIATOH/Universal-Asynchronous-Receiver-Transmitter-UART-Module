@@ -105,13 +105,13 @@ __interrupt void USCI0RX_ISR(void)
 		}
 		else if (UCA0RXBUF == '8')                     // '8' received?
 		{
-			state = state0;
-			//__bic_SR_register_on_exit(LPM0_bits + GIE);
+			state = state8;
+			__bic_SR_register_on_exit(LPM0_bits + GIE);
 		}
 		else if (UCA0RXBUF == '9')                     // '9' received?
 		{
-			state = state8;
-			__bic_SR_register_on_exit(LPM0_bits + GIE);
+			state = state0;
+			//__bic_SR_register_on_exit(LPM0_bits + GIE);
 		}
   }
   else {
