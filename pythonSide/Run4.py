@@ -41,7 +41,6 @@ def transmit_data(serial_comm, enableTX, delay=0.25):
             return False
     return enableTX
 
-
 def start_communication():
     serial_comm = ser.Serial('COM4', baudrate=9600, bytesize=ser.EIGHTBITS,
                              parity=ser.PARITY_NONE, stopbits=ser.STOPBITS_ONE,
@@ -55,10 +54,8 @@ def start_communication():
         # TX
         enableTX = transmit_data(serial_comm, enableTX)
 
-
 def main():
     start_communication()
-
 
 if __name__ == "__main__":
     main()

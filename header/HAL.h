@@ -15,7 +15,6 @@ extern void sysConfig(void);
 extern void enterLPM(unsigned char);
 
 // Interrupts
-
 void _buttonDebounceDelay(int button);
 extern void enable_interrupts();
 extern void disable_interrupts();
