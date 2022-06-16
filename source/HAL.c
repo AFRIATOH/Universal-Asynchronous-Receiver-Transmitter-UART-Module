@@ -24,7 +24,6 @@ void sysConfig(void)
 	ADCconfig();
 	RGBconfig();
   	lcd_init();
-	//GPIOconfig();
 	TIMERconfig();
 }
 
@@ -134,8 +133,8 @@ __interrupt void USCI0TX_ISR(void)
 
 {           		
 	if(state == state5){
-		UCA0TXBUF = potentiometer_val[i++];
-		if (i == sizeof potentiometer_val -1){					     // TX over?
+		UCA0TXBUF = pot_val[i++];
+		if (i == sizeof pot_val -1){					     // TX over?
 			i = 0; 
 			IE2 &= ~UCA0TXIE;        					 // Disable USCI_A0 TX interrupt
 			IE2 |= UCA0RXIE;                 			 // Enable USCI_A0 RX interrupt

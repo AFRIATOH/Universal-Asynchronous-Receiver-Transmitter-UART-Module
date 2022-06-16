@@ -28,9 +28,7 @@ void TIMERconfig(void){
 //            ADC congiguration 
 //-------------------------------------------------------------------------------------
 void ADCconfig(void){
-	
 	ADC10AE0 |= BIT3;
-
 }   
 
 //------------------------------------------------------------------------------------- 
@@ -42,6 +40,7 @@ void RGBconfig(void){
 	RGBPortDir |= (BIT0 + BIT1 + BIT2);                // Leds GPIO-output
 	RGB_clear;	
 }   
+
 //------------------------------------------------------------------------------------- 
 //           UART congiguration 
 //-------------------------------------------------------------------------------------
@@ -68,26 +67,20 @@ void UARTconfig(void)
   UCA0BR0 = 104;                           // 
   UCA0BR1 = 0x00;                           //
   UCA0MCTL = UCBRS0;               // 
-  //UCA0CTL1 &= ~UCSWRST;                     // **Initialize USCI state machine**
-  //IE2 |= UCA0RXIE;                          // Enable USCI_A0 RX interrupt
-  //__bis_SR_register(LPM0_bits + GIE);       // Enter LPM3 w/ int until Byte RXed
 }
+
 //******************************************************************
 // Delay usec functions
 //******************************************************************
 void DelayyUs(unsigned int cnt){
-  
 	unsigned char i;
-        for(i=cnt ; i>0 ; i--) asm(" nop"); // tha command asm("nop") takes raphly 1usec
-	
+  for(i=cnt ; i>0 ; i--) asm(" nop"); // tha command asm("nop") takes raphly 1usec
 }
 //******************************************************************
 // Delay msec functions
 //******************************************************************
 void DelayyMs(unsigned int cnt){
-  
 	unsigned char i;
-        for(i=cnt ; i>0 ; i--) DelayUs(1000); // tha command asm("nop") takes raphly 1usec
-	
+  for(i=cnt ; i>0 ; i--) DelayUs(1000); // tha command asm("nop") takes raphly 1usec
 }
 //******************************************************************

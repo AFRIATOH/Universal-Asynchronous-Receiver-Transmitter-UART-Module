@@ -11,24 +11,21 @@ void lcd_puts(const char * s){
 	    lcd_data(*s++);
 
 }
-
 //******************************************************************
-//function - intger to string
+//function utitly
 //******************************************************************
 void int_to_str(char *str, unsigned int number){
 
+    int j;
     int size = 0;
     long tmp = number;
     long len = 0;
 
-    // Find the size of the intPart by repeatedly dividing by 10
     while(tmp){
         len++;
         tmp /= 10;
     }
 
-    // Print out the numbers in reverse
-    int j;
     for(j = len - 1; j >= 0; j--){
         str[j] = (number % 10) + '0';
         number /= 10;
@@ -93,9 +90,6 @@ void print_num(int num){
 void sleep(void){
     RGB_clear;
     lcd_clear();
-    // tx = 1;
-    // UCA0CTL1 &= ~UCSWRST;
-    // IE2 |= UCA0TXIE;
     __bis_SR_register(LPM0_bits + GIE); 
 }
 
@@ -161,7 +155,7 @@ void potentiometer(){
     __bis_SR_register(CPUOFF + GIE);
     __no_operation();                       // For debugger
     ADC10CTL0 &= ~ADC10ON;
-    int_to_str(potentiometer_val,ADC10MEM);
+    int_to_str(pot_val,ADC10MEM);
     UCA0CTL1 &= ~UCSWRST;
     IE2 |= UCA0TXIE;
 }

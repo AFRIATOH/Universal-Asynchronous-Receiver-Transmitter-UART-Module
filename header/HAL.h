@@ -8,6 +8,7 @@
 
 extern enum FSMstate state;   // global variable
 extern enum SYSmode lpm_mode; // global variable
+
 extern int tx;
 
 // System
@@ -37,6 +38,6 @@ extern void ResetTimer();
 extern void TIMERdelay(int);
 
 extern volatile char new_X[6];
-extern volatile char potentiometer_val[4];
+extern volatile char pot_val[5];
 
 #endif
