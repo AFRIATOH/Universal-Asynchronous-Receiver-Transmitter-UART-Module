@@ -139,7 +139,7 @@ __interrupt void USCI0TX_ISR(void)
 			i = 0; 
 			IE2 &= ~UCA0TXIE;        					 // Disable USCI_A0 TX interrupt
 			IE2 |= UCA0RXIE;                 			 // Enable USCI_A0 RX interrupt
-			state = state0;
+			state = state7;
 			tx = 0;
             }
 	}
@@ -157,26 +157,26 @@ __interrupt void USCI0TX_ISR(void)
 }
 
 //------------------------------------------------------------------
+void DebounceDelay(int button){
+    volatile unsigned int i;
+    for(i = 1000; i > 0; i--);                     //delay, button debounce
+    while(!(P1IN & button));          // wait of release the button
+    for(i = 1000; i > 0; i--);                     //delay, button debounce
+    P1IFG &= ~button;             // manual clear of p1.button
+}
+//------------------------------------------------------------------
 //           Port1 Interrupt Service Rotine 
 //------------------------------------------------------------------
 
-// void _buttonDebounceDelay(int button){
-//     volatile unsigned int i;
-//     for(i = 1000; i > 0; i--);                     //delay, button debounce
-// 	while(!(P1IN & button)); 		   // wait of release the button
-//     for(i = 1000; i > 0; i--);                     //delay, button debounce
-//     P1IFG &= ~button;       	   // manual clear of p1.button
-// }
-
-// #pragma vector=PORT1_VECTOR
-// __interrupt void PORT1_ISR(void){
-// 	if(P1IFG & 0x10){
-// 		_buttonDebounceDelay(0x10);
-// 		menu_tx = 1;
-// 		UCA0CTL1 &= ~UCSWRST;                     // **Initialize USCI state machine**
-// 		IE2 |= UCA0TXIE;                          // Enable USCI_A0 TX interrupt
-// 	}
-// }
+#pragma vector=PORT1_VECTOR
+__interrupt void PORT1_ISR(void){
+    if(P1IFG & 0x10){
+        DebounceDelay(0x10);
+        tx = 1;
+        UCA0CTL1 &= ~UCSWRST;                     // **Initialize USCI state machine**
+        IE2 |= UCA0TXIE;                          // Enable USCI_A0 TX interrupt
+    }
+}
 
 //------------------------------------------------------------------
 //           Timer A0 Interrupt Service Rotine 

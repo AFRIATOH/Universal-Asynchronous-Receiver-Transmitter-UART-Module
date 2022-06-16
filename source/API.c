@@ -16,37 +16,6 @@ void lcd_puts(const char * s){
 //function - intger to string
 //******************************************************************
 void int_to_str(char *str, unsigned int number){
-   long tmp = number, Strlen = 0;
-   int length = 0;
-
-   while(tmp){
-       Strlen++;
-       tmp /= 10;
-   }
-   int k;
-   for(k = Strlen - 1; k >= 0; k--){
-       str[k] = (number % 10) + '0';
-       number /= 10;
-   }
-
-   length = Strlen;
-   str[length] = '\0';
-   
-}
-
-int str_to_int( char volatile *str)
-{
-    int i,res = 0;
-    for (i = 0; str[i] != '\0'; ++i) {
-        if (str[i]> '9' || str[i]<'0')
-            return -1;
-        res = res * 10 + str[i] - '0';
-    }
-
-    return res;
-}
-
-void to_string(char *str, unsigned int number){
 
     int size = 0;
     long tmp = number;
@@ -67,6 +36,19 @@ void to_string(char *str, unsigned int number){
     size += len;
     str[size] = '\0';
 }
+
+int str_to_int( char volatile *str)
+{
+    int i,res = 0;
+    for (i = 0; str[i] != '\0'; ++i) {
+        if (str[i]> '9' || str[i]<'0')
+            return -1;
+        res = res * 10 + str[i] - '0';
+    }
+
+    return res;
+}
+
 
 void print_num(int num){
     if(num == 0){
@@ -170,6 +152,7 @@ void get_X(void){
 //state5
 //******************************************************************
 void potentiometer(){
+    ADC10CTL1 = INCH_3 + ADC10SSEL_0;
     ADC10CTL0 = ADC10SHT_0 + ADC10IE;
     ADC10CTL0 |= ADC10ON;
     ADC10CTL0 &= ~ENC;
@@ -178,7 +161,7 @@ void potentiometer(){
     __bis_SR_register(CPUOFF + GIE);
     __no_operation();                       // For debugger
     ADC10CTL0 &= ~ADC10ON;
-    to_string(potentiometer_val,ADC10MEM);
+    int_to_str(potentiometer_val,ADC10MEM);
     UCA0CTL1 &= ~UCSWRST;
     IE2 |= UCA0TXIE;
 }

@@ -8,7 +8,8 @@ extern unsigned int X_delay = 500;
 extern int count_up_val = 0;
 extern int count_down_val = 65535;
 volatile char new_X[6];
-extern volatile char potentiometer_val[4]={' ',' ',' ',' '};
+volatile char potentiometer_val[4]={' ',' ',' ',' '};
+
 void main(void){
   
 
@@ -54,7 +55,11 @@ void main(void){
 
       case state8: 
             // real time task
-      break; 
+      break;
+
+      default:
+          state = state7;
+          break;
     }
   }
 }
