@@ -12,6 +12,7 @@ extern volatile char potentiometer_val[4]={' ',' ',' ',' '};
 
 void main(void){
   
+
   sysConfig();
   state = state7;  // start in idle state on RESET
   lpm_mode = mode0;     // start in idle state on RESET

@@ -70,9 +70,9 @@ void to_string(char *str, unsigned int number){
 
 void print_num(int num){
     if(num == 0){
-        lcd_puts(48);
+        lcd_data('0');
     }
-    if(num < 10){
+    else if(num < 10){
         char pr[1];
         int_to_str(pr, num);
         lcd_puts(pr);
