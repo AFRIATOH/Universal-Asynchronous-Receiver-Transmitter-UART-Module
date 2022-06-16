@@ -37,4 +37,5 @@ extern void delay_x(unsigned int);
 extern void ResetTimer();
 extern void TIMERdelay(int);
 
+extern volatile char new_X[6];
 #endif
