@@ -13,5 +13,6 @@ extern void get_X(void);
 extern void potentiometer(void);
 extern void clear_all(void);
 extern void show_menu(void);
+extern int str_to_int( char volatile *str);
 
 #endif

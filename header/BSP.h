@@ -99,6 +99,6 @@ extern void DelayyMs(unsigned int cnt);
 extern unsigned int X_delay;
 extern int count_up_val;
 extern int count_down_val;
-extern volatile char potentiometer_val[4];
+
 
 #endif
