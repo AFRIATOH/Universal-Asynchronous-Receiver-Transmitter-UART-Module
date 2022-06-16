@@ -1,3 +1,4 @@
+import sys
 import serial as ser
 import time
 
@@ -31,16 +32,12 @@ def transmit_data(serial_comm, enableTX, delay=0.25):
         serial_comm.write(bytes(state, 'ascii'))
         time.sleep(delay)  # delay for accurate read/write operations on both
         enableTX = True
-        while 1:
-            # RX
-            enableTX = receive_data(serial_comm, enableTX)
-            # TX
-            enableTX = transmit_data(serial_comm, enableTX)
         if state == '4':
             x = input("enter new delay: ")
-            serial_comm.write(bytes(x + '\0', 'ascii'))
+            x = bytes(x + '\n', 'ascii')
+            serial_comm.write(x)
             time.sleep(delay)  # delay for accurate read/write operations on both ends
-        if serial_comm.out_waiting == 0:
+        if (serial_comm.out_waiting == 0) and (state == '5' or '7'):
             return False
     return enableTX
 
