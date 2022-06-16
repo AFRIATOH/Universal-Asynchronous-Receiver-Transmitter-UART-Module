@@ -169,9 +169,6 @@ void get_X(void){
 //******************************************************************
 //state5
 //******************************************************************
-void potentiometer(void){
-
-}
 void potentiometer(){
     ADC10CTL0 = ADC10SHT_0 + ADC10IE;
     ADC10CTL0 |= ADC10ON;

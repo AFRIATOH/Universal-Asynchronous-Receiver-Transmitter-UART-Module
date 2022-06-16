@@ -120,10 +120,10 @@ __interrupt void USCI0RX_ISR(void)
 		}
   }
   else {
-		new_X[j++] = RxBuffer;
+		new_X[j++] = UCA0RXBUF;
 	  	if (new_X[j-1] == '\0'){
 		  j = 0;
-		  x = str_to_int(X);
+		  X_delay = str_to_int(new_X);
           state = state0;
 	  }
   }
